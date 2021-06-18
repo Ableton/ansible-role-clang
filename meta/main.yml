@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: ableton
+  company: Ableton AG
+  description: Installs clang compiler and utilities
+  license: MIT
+  min_ansible_version: 2.10
+  role_name: clang
+
+  galaxy_tags:
+    - clang
+    - development
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
+dependencies: []
