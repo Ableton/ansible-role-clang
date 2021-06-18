@@ -1,1 +1,3 @@
 ---
+# A non-empty list of clang versions to install.
+clang_versions: []
