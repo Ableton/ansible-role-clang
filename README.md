@@ -41,7 +41,7 @@ Example Playbook
       - 12
 
   roles:
-    - ableton.ccache
+    - ableton.clang
 ```
 
 License
