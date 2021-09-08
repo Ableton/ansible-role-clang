@@ -1,8 +1,8 @@
 """Molecule tests for the default scenario."""
 
 import os
-import pytest
 
+import pytest
 import testinfra.utils.ansible_runner
 
 
