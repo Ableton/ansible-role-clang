@@ -4,9 +4,9 @@
 #
 #    pip-compile --output-file=requirements-dev.txt requirements-dev.in
 #
-ansible==4.4.0
+ansible==4.6.0
     # via -r requirements-dev.in
-ansible-core==2.11.3
+ansible-core==2.11.5
     # via ansible
 ansible-lint==5.1.2
     # via
@@ -162,8 +162,6 @@ rich==9.11.1
     #   molecule
 ruamel.yaml==0.16.10
     # via ansible-lint
-ruamel.yaml.clib==0.2.6
-    # via ruamel.yaml
 selinux==0.2.1
     # via
     #   molecule
