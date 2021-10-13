@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    clang_versions:
+      - 9
+      - 11
+      - 12
+  roles:
+    - ansible-role-clang
