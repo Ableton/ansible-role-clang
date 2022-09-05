@@ -1,18 +1,18 @@
 ---
 - name: Assert required variables
-  assert:
+  ansible.builtin.assert:
     that:
       - clang_versions | length > 0
 
 - name: Add clang apt repository key
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     url: "https://apt.llvm.org/llvm-snapshot.gpg.key"
     state: present
 
 - name: Add clang apt binary repositories
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb http://apt.llvm.org/{{ clang_apt_distribution }}/ \
       llvm-toolchain-{{ clang_apt_distribution }}-{{ clang_version }} main"
     state: present
@@ -22,14 +22,14 @@
   with_items: "{{ clang_versions }}"
 
 - name: Initialize clang_packages_str fact
-  set_fact:
+  ansible.builtin.set_fact:
     clang_packages_str: ""
 
 # We append the packages to a string and then split it to a list, because appending to a
 # list requires interpolation and using interpolated strings inside of such a Jinja2
 # expression is a big mess.
 - name: Assemble clang package list
-  set_fact:
+  ansible.builtin.set_fact:
     clang_packages_str: |
       {{ clang_packages_str }}
       clang-{{ clang_version }}
@@ -40,12 +40,12 @@
   with_items: "{{ clang_versions }}"
 
 - name: Transform clang_packages to a list
-  set_fact:
+  ansible.builtin.set_fact:
     # By using the difference filter, we can remove all empty strings
     clang_packages: "{{ clang_packages_str.split('\n') | difference(['']) }}"
 
 - name: Install clang packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ clang_packages }}"
     update_cache: true
