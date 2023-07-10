@@ -7,4 +7,4 @@
       - 11
       - 12
   roles:
-    - ansible-role-clang
+    - ableton.clang
