@@ -7,18 +7,16 @@ devToolsProject.run(
   defaultBranch: 'main',
   setup: { data ->
     Object venv = pyenv.createVirtualEnv(readFile('.python-version'))
-    venv.run('pip install -r requirements-dev.txt')
+    venv.inside {
+      sh 'pip install -r requirements-dev.txt'
+      ansibleUtils.galaxyInstall()
+    }
     data['venv'] = venv
   },
   test: { data ->
     data.venv.inside {
       parallel(
-        'ansible-lint': {
-          sh(
-            label: 'ansible-lint',
-            script: 'ansible-lint --strict --offline -c .ansible-lint.yml',
-          )
-        },
+        'ansible-lint': { ansibleUtils.ansibleLint() },
         groovylint: { groovylint.checkSingleFile(path: './Jenkinsfile') },
         molecule: { ansibleUtils.molecule() },
         yamllint: { sh 'yamllint --strict .' },
