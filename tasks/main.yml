@@ -19,7 +19,7 @@
     filename: "clang-{{ clang_version }}-stable"
   loop_control:
     loop_var: clang_version
-  with_items: "{{ clang_versions }}"
+  loop: "{{ clang_versions }}"
 
 - name: Initialize clang_packages_str fact
   ansible.builtin.set_fact:
@@ -37,7 +37,7 @@
       llvm-{{ clang_version }}
   loop_control:
     loop_var: clang_version
-  with_items: "{{ clang_versions }}"
+  loop: "{{ clang_versions }}"
 
 - name: Transform clang_packages to a list
   ansible.builtin.set_fact:
